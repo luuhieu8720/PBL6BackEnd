@@ -4,13 +4,13 @@ echo BUILD.........................
 docker build -t registry.heroku.com/pbl6-back-end/web .
 
 echo PUSH..........................
-call heroku container:push web
+call heroku container:push web -a pbl6-back-end
 
 echo RELEASE.......................
-call heroku container:release web
+call heroku container:release web -a pbl6-back-end
 
 
 echo OPEN..........................
-call heroku open
+call heroku open -a pbl6-back-end
 
 echo DONE..........................
