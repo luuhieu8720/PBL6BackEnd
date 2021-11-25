@@ -1,7 +1,7 @@
 @echo OFF
 
 echo BUILD.........................
-docker build -t registry.heroku.com/hbookstore/web .
+docker build -t registry.heroku.com/pbl6-back-end/web .
 
 echo PUSH..........................
 call heroku container:push web
