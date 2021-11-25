@@ -1,5 +1,0 @@
-﻿build:
-  docker:
-    web: ./PBL6BackEnd/Dockerfile
-run:
-  web: bundle exec puma -C config/puma.rb

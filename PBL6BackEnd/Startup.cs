@@ -47,6 +47,7 @@ namespace PBL6BackEnd
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
             services.AddHttpContextAccessor();
+            services.AddHealthChecks();
             services.ConfigDatabase();
             services.ConfigSecurity();
             services.MigrateDatabase();
@@ -70,21 +71,13 @@ namespace PBL6BackEnd
             }
 
             app.UseHttpsRedirection();
-
             app.UseHealthChecks("/health");
-
-            app.UseDefaultFiles();
-
             app.UseRouting();
-
+            app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            app.UseAuthentication();
-
             app.UseMiddleware<TokenProviderMiddleware>();
 
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
