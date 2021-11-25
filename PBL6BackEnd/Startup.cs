@@ -71,6 +71,8 @@ namespace PBL6BackEnd
 
             app.UseHttpsRedirection();
 
+            app.UseHealthChecks("/health");
+
             app.UseDefaultFiles();
 
             app.UseRouting();
