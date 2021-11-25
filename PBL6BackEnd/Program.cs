@@ -17,14 +17,23 @@ namespace PBL6BackEnd
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var portConfig = Environment.GetEnvironmentVariable("PORT");
+
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureKestrel(serverOptions =>
+                    webBuilder
+                    .ConfigureKestrel(serverOptions =>
                     {
-                        serverOptions.Listen(IPAddress.Any, Convert.ToInt32(Environment.GetEnvironmentVariable("PORT")));
-                    }).UseStartup<Startup>();
+                        if (!string.IsNullOrEmpty(portConfig))
+                        {
+                            serverOptions.Listen(IPAddress.Any, Convert.ToInt32(portConfig));
+                        }
+                    })
+                    .UseStartup<Startup>();
                 });
+        }
     }
 }
