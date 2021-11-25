@@ -22,7 +22,7 @@ namespace PBL6BackEnd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_UsersTable", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
