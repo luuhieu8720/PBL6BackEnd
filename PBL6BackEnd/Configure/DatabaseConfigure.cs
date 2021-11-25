@@ -19,10 +19,12 @@ namespace PBL6BackEnd.Configure
 
         public static void MigrateDatabase(this IServiceCollection services)
         {
-            services.BuildServiceProvider()
+            var database = services.BuildServiceProvider()
                 .GetService<DataContext>()
-                .Database
-                .Migrate();
+                .Database;
+
+            database.EnsureCreated();
+            database.Migrate();
         }
     }
 }

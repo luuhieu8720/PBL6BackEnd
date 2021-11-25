@@ -25,6 +25,16 @@ namespace PBL6BackEnd.Config
         {
             var connectionString = $"Server={Host};Port={Port};User Id={Username};Password={Password};Database={DatabaseName}";
 
+            if (Secure)
+            {
+                connectionString += ";sslmode=Require";
+            }
+
+            if (TrustConnection)
+            {
+                connectionString += ";Trust Server Certificate=true";
+            }
+
             return connectionString;
         }
 
