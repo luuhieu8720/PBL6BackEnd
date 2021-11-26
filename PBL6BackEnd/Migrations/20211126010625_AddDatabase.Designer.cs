@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PBL6BackEnd;
 
-namespace PBL6BackEnd.Migrations
+namespace PBL6_Back_end.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211122151523_AddDatabase")]
+    [Migration("20211126010625_AddDatabase")]
     partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

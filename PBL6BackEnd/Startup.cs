@@ -47,9 +47,9 @@ namespace PBL6BackEnd
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
             services.AddHttpContextAccessor();
-            services.AddHealthChecks();
             services.ConfigDatabase();
             services.ConfigSecurity();
+            services.AddHealthChecks();
             services.MigrateDatabase();
             services.AddMvc(ConfigMvc);
         }
