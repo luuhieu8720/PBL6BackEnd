@@ -35,22 +35,29 @@ namespace PBL6BackEnd
         {
             services.ConfigType<PostgresConfig>(Configuration);
             services.ConfigType<TokenConfig>(Configuration);
+
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PBL6_Back_end", Version = "v1" });
-            });
+            
             services.AddCors();
+
             services.AddAuthentication();
             services.AddAuthorization();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
+            
             services.AddHttpContextAccessor();
+
             services.ConfigDatabase();
             services.ConfigSecurity();
+
             services.AddHealthChecks();
+
+            services.AddSwagger();
+
             services.MigrateDatabase();
+
             services.AddMvc(ConfigMvc);
         }
 
@@ -66,18 +73,24 @@ namespace PBL6BackEnd
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PBL6_Back_end v1"));
             }
 
+            app.AddSwagger();
+
             app.UseHttpsRedirection();
+
             app.UseHealthChecks("/health");
+
             app.UseRouting();
+
             app.UseDefaultFiles();
+
             app.UseStaticFiles();
+
             app.UseMiddleware<TokenProviderMiddleware>();
 
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
