@@ -46,7 +46,8 @@ namespace PBL6BackEnd
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
-            
+            services.AddScoped<IMachineLearningRepository, MachineLearningRepository>();
+
             services.AddHttpContextAccessor();
 
             services.ConfigDatabase();
