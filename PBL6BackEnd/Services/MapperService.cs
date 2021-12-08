@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PBL6BackEnd.DTO;
+using PBL6BackEnd.DTO.MaskPredictDTO;
 using PBL6BackEnd.DTO.UserDTO;
 using PBL6BackEnd.Model;
 using System;
@@ -17,6 +18,8 @@ namespace PBL6BackEnd.Services
         private static void CreateMap(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<UserForm, User>();
+            cfg.CreateMap<MaskPredictForm, MaskPredictedInfo>();
+            cfg.CreateMap<MaskPredictedInfo, MaskPredictItem>();
         }
 
         public static T ConvertTo<T>(this object source)

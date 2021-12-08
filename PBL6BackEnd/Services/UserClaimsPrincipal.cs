@@ -11,9 +11,9 @@ namespace PBL6BackEnd.Services
     public class UserClaimsPrincipal : ClaimsPrincipal
     {
         public AuthenUser AuthenUser { get; private set; }
-        public UserClaimsPrincipal(ClaimsIdentity claimsIdentity, User user) : base(claimsIdentity)
+        public UserClaimsPrincipal(ClaimsIdentity claimsIdentity) : base(claimsIdentity)
         {
-            AuthenUser = new AuthenUser(claimsIdentity, user);
+            AuthenUser = new AuthenUser(claimsIdentity);
         }
     }
 }

@@ -40,9 +40,6 @@ namespace PBL6BackEnd
             
             services.AddCors();
 
-            services.AddAuthentication();
-            services.AddAuthorization();
-
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<Services.IAuthenticationService, Services.AuthenticationService>();
@@ -89,6 +86,8 @@ namespace PBL6BackEnd
             app.UseStaticFiles();
 
             app.UseMiddleware<TokenProviderMiddleware>();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

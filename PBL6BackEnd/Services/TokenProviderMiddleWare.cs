@@ -19,15 +19,13 @@ namespace PBL6BackEnd.Services
         {
             this.next = next;
         }
-        public async Task Invoke(HttpContext context, IUserRepository userRepository)
+        public async Task Invoke(HttpContext context)
         {
             var authenticateInfo = await context.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
             var bearerTokenIdentity = authenticateInfo?.Principal;
             if (bearerTokenIdentity?.Identity is ClaimsIdentity identity)
             {
-                var userId = Guid.Parse(identity.GetClaimValue(ClaimTypes.NameIdentifier));
-                var user = await userRepository.GetById(userId);
-                context.User = new UserClaimsPrincipal(identity, user);
+                context.User = new UserClaimsPrincipal(identity);
             }
             await next(context);
         }

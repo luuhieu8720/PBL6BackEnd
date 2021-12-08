@@ -16,24 +16,28 @@ namespace PBL6BackEnd.DTO.UserDTO
             FirstName = user.FirstName;
             LastName = user.LastName;
             Username = user.Username;
+            Role = user.Role;
         }
 
-        public AuthenUser(ClaimsIdentity claimsIdentity, User user)
+        public AuthenUser(ClaimsIdentity claimsIdentity)
         {
             Id = Guid.Parse(claimsIdentity.GetClaimValue(ClaimTypes.NameIdentifier));
-            FirstName = user.FirstName;
-            LastName = user.LastName;
-            Username = claimsIdentity.GetClaimValue(ClaimTypes.GivenName);
+            FirstName = claimsIdentity.GetClaimValue(ClaimTypes.GivenName);
+            LastName = claimsIdentity.GetClaimValue(ClaimTypes.Surname);
+            Username = claimsIdentity.GetClaimValue(ClaimTypes.Upn);
+            Role = claimsIdentity.GetClaimValue(ClaimTypes.Role).ToEnum<Role>();
         }
 
         public Claim[] GetClaims()
         {
             var claims = new[] {
                 new Claim(ClaimTypes.NameIdentifier, Id.ToString()),
-                new Claim(ClaimTypes.Surname, LastName ?? string.Empty),
                 new Claim(ClaimTypes.GivenName, FirstName ?? string.Empty),
-                new Claim(ClaimTypes.GivenName, Username)
+                new Claim(ClaimTypes.Surname, LastName ?? string.Empty),
+                new Claim(ClaimTypes.Upn, Username),
+                new Claim(ClaimTypes.Role, Role.ToString())
             };
+
             return claims;
         }
     }

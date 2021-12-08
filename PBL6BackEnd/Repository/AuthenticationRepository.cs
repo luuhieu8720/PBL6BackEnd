@@ -21,9 +21,10 @@ namespace PBL6BackEnd.Repository
 
         public async Task<User> Login(LoginForm loginForm)
         {
-            return await dataContext.Users
+            var test = await dataContext.Users
                             .FirstOrDefaultAsync(x => x.Username == loginForm.Username && x.Password == loginForm.Password.Encrypt())
                            ?? throw new BadRequestException("Wrong username or password");
+            return test;
         }
     }
 }

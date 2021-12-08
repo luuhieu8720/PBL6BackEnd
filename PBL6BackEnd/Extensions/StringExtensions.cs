@@ -20,5 +20,9 @@ namespace PBL6BackEnd.Extensions
 
             return string.Concat(byteHash.Select(x => x.ToString("x2")));
         }
+        public static T ToEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
     }
 }
