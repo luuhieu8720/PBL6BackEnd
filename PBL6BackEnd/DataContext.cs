@@ -32,5 +32,7 @@ namespace PBL6BackEnd
         }
 
         public virtual DbSet<User> Users { get; set; }
+
+        public virtual DbSet<MaskPredictedInfo> MaskPredictedInfos { get; set; }
     }
 }

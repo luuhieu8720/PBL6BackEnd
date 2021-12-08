@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PBL6BackEnd.DTO.MachineLearningDTO;
+using PBL6BackEnd.DTO.MaskPredictDTO;
 using PBL6BackEnd.Repository;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,11 @@ namespace PBL6BackEnd.Controllers
             this.machineLearningRepository = machineLearningRepository;
         }
 
-        [HttpPost("/predict")]
+        [HttpPost("predict")]
         public async Task<ResultResponse> Get([FromBody]RequestForm requestForm) => await machineLearningRepository.Get(requestForm);
+
+        [HttpGet("predict")]
+        [Authorize]
+        public async Task<List<MaskPredictItem>> Get() => await machineLearningRepository.Get();
     }
 }

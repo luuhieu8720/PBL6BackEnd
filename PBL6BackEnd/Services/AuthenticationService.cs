@@ -51,7 +51,8 @@ namespace PBL6BackEnd.Services
                 UserId = authenUser.Id,
                 FirstName = authenUser.FirstName,
                 LastName = authenUser.LastName,
-                Username = authenUser.Username
+                Username = authenUser.Username,
+                Role = authenUser.Role
             };
         }
     }
