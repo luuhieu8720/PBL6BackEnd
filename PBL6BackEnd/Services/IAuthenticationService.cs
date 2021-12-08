@@ -10,6 +10,7 @@ namespace PBL6BackEnd.Services
     public interface IAuthenticationService
     {
         Task<TokenResponse> Login(LoginForm loginForm);
+
         AuthenUser CurrentUser { get; }
 
         Guid CurrentUserId { get; }

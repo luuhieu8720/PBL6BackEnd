@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using PBL6BackEnd.DTO.AuthDTO;
 using PBL6BackEnd.DTO.UserDTO;
 using PBL6BackEnd.Exceptions;
 using PBL6BackEnd.Extensions;
@@ -7,6 +9,7 @@ using PBL6BackEnd.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PBL6BackEnd.Repository
@@ -15,12 +18,15 @@ namespace PBL6BackEnd.Repository
     {
         private readonly DataContext dataContext;
 
-        public UserRepository(DataContext dataContext)
+        private readonly IAuthenticationService authenticationService;
+
+        public UserRepository(DataContext dataContext, IAuthenticationService authenticationService)
         {
             this.dataContext = dataContext;
+            this.authenticationService = authenticationService;
         }
 
-        public async Task Create(UserForm userForm)
+        public async Task Create(UserCreateForm userForm)
         {
             if (await dataContext.Users.AnyAsync(x => x.Username == userForm.Username))
                 throw new BadRequestException("This username has already been registered");
@@ -38,5 +44,44 @@ namespace PBL6BackEnd.Repository
         {
             return await dataContext.Users.FindAsync(Id);
         }
+
+        public async Task Update(UserUpdateForm userUpdateForm)
+        {
+            var currentUserId = authenticationService.CurrentUserId;
+
+            var user = await GetById(currentUserId);
+
+            userUpdateForm.CopyTo(user);
+
+            dataContext.Entry(user).State = EntityState.Modified;
+
+            await dataContext.SaveChangesAsync();
+        }
+
+        public async Task ChangePassword(PasswordForm passwordForm)
+        {
+            var currentUserId = authenticationService.CurrentUserId;
+
+            var user = await GetById(currentUserId);
+
+            if (!string.IsNullOrEmpty(passwordForm.OldPassword))
+            {
+                if (passwordForm.OldPassword.Encrypt() != user.Password)
+                {
+                    throw new BadRequestException("The old password is incorrect");
+                }
+
+                else if (passwordForm.NewPassword != passwordForm.ConfirmPassword)
+                {
+                    throw new BadRequestException("New password and confirmation password must match");
+                }
+
+                user.Password = passwordForm.NewPassword.Encrypt();
+            }
+
+            dataContext.Entry(user).State = EntityState.Modified;
+
+            await dataContext.SaveChangesAsync();
+        } 
     }
 }

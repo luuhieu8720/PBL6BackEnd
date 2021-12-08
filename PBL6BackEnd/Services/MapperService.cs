@@ -17,9 +17,10 @@ namespace PBL6BackEnd.Services
 
         private static void CreateMap(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<UserForm, User>();
+            cfg.CreateMap<UserCreateForm, User>();
             cfg.CreateMap<MaskPredictForm, MaskPredictedInfo>();
             cfg.CreateMap<MaskPredictedInfo, MaskPredictItem>();
+            cfg.CreateMap<UserUpdateForm, User>();
         }
 
         public static T ConvertTo<T>(this object source)

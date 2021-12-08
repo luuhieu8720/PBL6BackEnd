@@ -20,11 +20,11 @@ namespace PBL6BackEnd.Controllers
             this.machineLearningRepository = machineLearningRepository;
         }
 
-        [HttpPost("predict/add")]
+        [HttpPost("predict")]
         public async Task<ResultResponse> Get([FromBody]RequestForm requestForm) => await machineLearningRepository.Get(requestForm);
 
-        [HttpGet("predict/get")]
-        [Authorize(Roles = "Admin")]
+        [HttpGet("predict")]
+        [Authorize]
         public async Task<List<MaskPredictItem>> Get() => await machineLearningRepository.Get();
     }
 }

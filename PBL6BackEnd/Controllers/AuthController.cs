@@ -17,18 +17,26 @@ namespace PBL6BackEnd.Controllers
     {
         private readonly IUserRepository repository;
         private readonly IAuthenticationService authenticationService;
+        private readonly IAuthenticationRepository authenticationRepository;
 
-        public AuthController(IAuthenticationService authenticationService, IUserRepository repository)
+        public AuthController(IAuthenticationService authenticationService, 
+            IUserRepository repository,
+            IAuthenticationRepository authenticationRepository)
         {
             this.authenticationService = authenticationService;
             this.repository = repository;
+            this.authenticationRepository = authenticationRepository;
         }
 
         [HttpPost("signup")]
         [Authorize(Roles = "Admin")]
-        public async Task Create([FromBody] UserForm userForm) => await repository.Create(userForm);
+        public async Task Create([FromBody] UserCreateForm userForm) => await repository.Create(userForm);
 
         [HttpPost("signin")]
         public async Task<TokenResponse> Post([FromBody] LoginForm loginForm) => await authenticationService.Login(loginForm);
+
+        [HttpGet]
+        [Authorize]
+        public AuthenUser Get() => authenticationService.CurrentUser;
     }
 }

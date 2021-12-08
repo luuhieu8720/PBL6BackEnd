@@ -1,4 +1,5 @@
-﻿using PBL6BackEnd.DTO.UserDTO;
+﻿using PBL6BackEnd.DTO.AuthDTO;
+using PBL6BackEnd.DTO.UserDTO;
 using PBL6BackEnd.Model;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,12 @@ namespace PBL6BackEnd.Repository
 {
     public interface IUserRepository
     {
-        Task Create(UserForm userForm);
+        Task Create(UserCreateForm userForm);
 
         Task<User> GetById(Guid Id);
+
+        Task Update(UserUpdateForm userUpdateForm);
+
+        Task ChangePassword(PasswordForm passwordForm);
     }
 }
