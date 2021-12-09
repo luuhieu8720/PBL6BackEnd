@@ -40,8 +40,8 @@ namespace PBL6BackEnd.DTO.UserDTO
                 new Claim(ClaimTypes.GivenName, FirstName ?? string.Empty),
                 new Claim(ClaimTypes.Surname, LastName ?? string.Empty),
                 new Claim(ClaimTypes.Upn, Username),
-                new Claim(ClaimTypes.MobilePhone, Phone),
-                new Claim(ClaimTypes.DateOfBirth, Birthday.ToString()),
+                new Claim(ClaimTypes.MobilePhone, Phone ?? string.Empty),
+                new Claim(ClaimTypes.DateOfBirth, Birthday.ToString() ?? string.Empty),
                 new Claim(ClaimTypes.Role, Role.ToString())
             };
 
