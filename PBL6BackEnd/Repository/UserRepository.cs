@@ -42,7 +42,8 @@ namespace PBL6BackEnd.Repository
 
         public async Task<User> GetById(Guid Id)
         {
-            return await dataContext.Users.FindAsync(Id);
+            return await dataContext.Users.FindAsync(Id) ?? 
+                throw new NotFoundException("Item can't be found");
         }
 
         public async Task Update(UserUpdateForm userUpdateForm)
@@ -96,6 +97,11 @@ namespace PBL6BackEnd.Repository
             var user = await dataContext.Users
                 .Where(x => x.Username == username)
                 .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                throw new NotFoundException("This username does not exist");
+            }
 
             return user.ConvertTo<UserDetail>();
         }
