@@ -10,7 +10,7 @@ using PBL6BackEnd;
 namespace PBL6_Back_end.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211126010625_AddDatabase")]
+    [Migration("20211209024413_AddDatabase")]
     partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,23 @@ namespace PBL6_Back_end.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("PBL6BackEnd.Model.MaskPredictedInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Base64String")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PredictedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaskPredictedInfos");
+                });
 
             modelBuilder.Entity("PBL6BackEnd.Model.User", b =>
                 {
