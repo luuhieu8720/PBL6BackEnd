@@ -28,5 +28,13 @@ namespace PBL6BackEnd.Controllers
 
         [HttpPut("password")]
         public async Task ChangePassword([FromBody] PasswordForm passwordForm) => await repository.ChangePassword(passwordForm);
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<List<UserItem>> Get() => await repository.Get();
+
+        [HttpGet("{username}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<UserDetail> Get(string username) => await repository.GetByUsername(username);
     }
 }

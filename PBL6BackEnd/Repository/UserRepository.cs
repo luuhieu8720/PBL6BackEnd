@@ -83,5 +83,21 @@ namespace PBL6BackEnd.Repository
 
             await dataContext.SaveChangesAsync();
         } 
+
+        public async Task<List<UserItem>> Get()
+        {
+            return await dataContext.Users
+                .Select(x => x.ConvertTo<UserItem>())
+                .ToListAsync();
+        }
+
+        public async Task<UserDetail> GetByUsername(string username)
+        {
+            var user = await dataContext.Users
+                .Where(x => x.Username == username)
+                .FirstOrDefaultAsync();
+
+            return user.ConvertTo<UserDetail>();
+        }
     }
 }

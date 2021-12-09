@@ -17,5 +17,9 @@ namespace PBL6BackEnd.Repository
         Task Update(UserUpdateForm userUpdateForm);
 
         Task ChangePassword(PasswordForm passwordForm);
+
+        Task<List<UserItem>> Get();
+
+        Task<UserDetail> GetByUsername(string username);
     }
 }
