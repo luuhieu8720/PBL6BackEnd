@@ -21,6 +21,8 @@ namespace PBL6BackEnd.Services
             cfg.CreateMap<MaskPredictForm, MaskPredictedInfo>();
             cfg.CreateMap<MaskPredictedInfo, MaskPredictItem>();
             cfg.CreateMap<UserUpdateForm, User>();
+            cfg.CreateMap<User, UserItem>();
+            cfg.CreateMap<User, UserDetail>();
         }
 
         public static T ConvertTo<T>(this object source)
