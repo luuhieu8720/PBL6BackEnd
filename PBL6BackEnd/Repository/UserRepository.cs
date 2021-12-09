@@ -34,7 +34,7 @@ namespace PBL6BackEnd.Repository
             userForm.Password = userForm.Password.Encrypt();
             var user = userForm.ConvertTo<User>();
 
-            user.Role = Role.Manager;
+            user.Role = Role.User;
 
             await dataContext.AddAsync(user);
             await dataContext.SaveChangesAsync();

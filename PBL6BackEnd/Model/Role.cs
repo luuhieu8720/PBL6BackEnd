@@ -7,7 +7,7 @@ namespace PBL6BackEnd.Model
 {
     public enum Role
     {
-        Manager = 1,
+        User = 1,
         Admin = 2
     }
 }

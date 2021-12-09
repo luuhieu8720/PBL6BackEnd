@@ -29,7 +29,6 @@ namespace PBL6BackEnd.Controllers
         }
 
         [HttpPost("signup")]
-        [Authorize(Roles = "Admin")]
         public async Task Create([FromBody] UserCreateForm userForm) => await repository.Create(userForm);
 
         [HttpPost("signin")]
