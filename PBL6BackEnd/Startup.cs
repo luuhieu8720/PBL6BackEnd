@@ -33,12 +33,11 @@ namespace PBL6BackEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.ConfigType<PostgresConfig>(Configuration);
             services.ConfigType<TokenConfig>(Configuration);
 
             services.AddControllers();
-            
-            services.AddCors();
 
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -46,6 +45,7 @@ namespace PBL6BackEnd
             services.AddScoped<IMachineLearningRepository, MachineLearningRepository>();
 
             services.AddHttpContextAccessor();
+            services.AddAuthentication();
 
             services.ConfigDatabase();
             services.ConfigSecurity();
@@ -72,6 +72,12 @@ namespace PBL6BackEnd
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.AddSwagger();
 
