@@ -21,5 +21,7 @@ namespace PBL6BackEnd.DTO.UserDTO
         public DateTime Birthday { get; set; }
 
         public Role Role { get; set; }
+
+        public bool IsBlocked { get; set; }
     }
 }

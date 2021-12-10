@@ -42,11 +42,14 @@ namespace PBL6_Back_end.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("BirthDay")
+                    b.Property<DateTime>("Birthday")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
                         .HasColumnType("text");
@@ -71,8 +74,9 @@ namespace PBL6_Back_end.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            BirthDay = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Birthday = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Admin",
+                            IsBlocked = false,
                             LastName = "01",
                             Password = "d34b21af1ebb547742f2a78124c73764",
                             Role = 2,

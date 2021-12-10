@@ -15,10 +15,12 @@ namespace PBL6BackEnd.Model
 
         public string LastName { get; set; }
 
-        public DateTime BirthDay { get; set; }
+        public DateTime Birthday { get; set; }
 
         public string Phone { get; set; }
 
         public Role Role { get; set; }
+
+        public bool IsBlocked { get; set; }
     }
 }
