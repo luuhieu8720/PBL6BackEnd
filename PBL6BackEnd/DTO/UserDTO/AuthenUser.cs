@@ -18,7 +18,7 @@ namespace PBL6BackEnd.DTO.UserDTO
             LastName = user.LastName;
             Username = user.Username;
             Phone = user.Phone;
-            Birthday = user.BirthDay;
+            Birthday = user.Birthday;
             Role = user.Role;
         }
 

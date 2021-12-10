@@ -22,10 +22,16 @@ namespace PBL6BackEnd.Repository
 
         public async Task<User> Login(LoginForm loginForm)
         {
-            var test = await dataContext.Users
+            var user = await dataContext.Users
                             .FirstOrDefaultAsync(x => x.Username == loginForm.Username && x.Password == loginForm.Password.Encrypt())
                            ?? throw new BadRequestException("Wrong username or password");
-            return test;
+            
+            if (user.IsBlocked == true)
+            {
+                throw new BadRequestException("Your account is blocked");
+            }
+
+            return user;
         }
     }
 }

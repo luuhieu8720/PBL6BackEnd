@@ -36,5 +36,9 @@ namespace PBL6BackEnd.Controllers
         [HttpGet("{username}")]
         [Authorize(Roles = "Admin")]
         public async Task<UserDetail> Get(string username) => await repository.GetByUsername(username);
+
+        [HttpPut("block/{username}")]
+        [Authorize(Roles = "Admin")]
+        public async Task Block(string username) => await repository.Block(username);
     }
 }

@@ -21,5 +21,7 @@ namespace PBL6BackEnd.Repository
         Task<List<UserItem>> Get();
 
         Task<UserDetail> GetByUsername(string username);
+
+        Task Block(string username);
     }
 }

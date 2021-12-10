@@ -35,6 +35,7 @@ namespace PBL6BackEnd.Repository
             var user = userForm.ConvertTo<User>();
 
             user.Role = Role.User;
+            user.IsBlocked = false;
 
             await dataContext.AddAsync(user);
             await dataContext.SaveChangesAsync();
@@ -104,6 +105,19 @@ namespace PBL6BackEnd.Repository
             }
 
             return user.ConvertTo<UserDetail>();
+        }
+
+        public async Task Block(string username)
+        {
+            var user = await dataContext.Users
+                .FirstOrDefaultAsync(x => x.Username == username)
+                ?? throw new NotFoundException("This username does not exist");
+
+            user.IsBlocked = true;
+
+            dataContext.Entry(user).State = EntityState.Modified;
+
+            await dataContext.SaveChangesAsync();
         }
     }
 }

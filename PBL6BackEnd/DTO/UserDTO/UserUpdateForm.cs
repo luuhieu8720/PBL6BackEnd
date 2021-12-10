@@ -14,7 +14,7 @@ namespace PBL6BackEnd.DTO.UserDTO
         [Required(ErrorMessage = "Last name cannot be null")]
         public string LastName { get; set; }
 
-        public DateTime BirthDay { get; set; }
+        public DateTime Birthday { get; set; }
 
         [Required(ErrorMessage = "Phone number cannot be null")]
         public string Phone { get; set; }
