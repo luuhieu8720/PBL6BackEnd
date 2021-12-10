@@ -40,5 +40,9 @@ namespace PBL6BackEnd.Controllers
         [HttpPut("block/{username}")]
         [Authorize(Roles = "Admin")]
         public async Task Block(string username) => await repository.Block(username);
+
+        [HttpPut("unblock/{username}")]
+        [Authorize(Roles = "Admin")]
+        public async Task UnBlock(string username) => await repository.UnBlock(username);
     }
 }
