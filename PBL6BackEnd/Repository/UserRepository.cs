@@ -113,7 +113,30 @@ namespace PBL6BackEnd.Repository
                 .FirstOrDefaultAsync(x => x.Username == username)
                 ?? throw new NotFoundException("This username does not exist");
 
+            if (user.IsBlocked == true)
+            {
+                throw new BadRequestException("This user has already been blocked");
+            }
+
             user.IsBlocked = true;
+
+            dataContext.Entry(user).State = EntityState.Modified;
+
+            await dataContext.SaveChangesAsync();
+        }
+
+        public async Task UnBlock(string username)
+        {
+            var user = await dataContext.Users
+                .FirstOrDefaultAsync(x => x.Username == username)
+                ?? throw new NotFoundException("This username does not exist");
+
+            if (user.IsBlocked == false)
+            {
+                throw new BadRequestException("This user hasn't been blocked");
+            }
+
+            user.IsBlocked = false;
 
             dataContext.Entry(user).State = EntityState.Modified;
 
