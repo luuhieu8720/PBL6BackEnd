@@ -24,7 +24,7 @@ namespace PBL6BackEnd.Repository
         public async Task<ResultResponse> Get(RequestForm requestForm)
         {
             using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://5934-34-79-185-15.ngrok.io/");
+            client.BaseAddress = new Uri("http://0d43-35-222-20-145.ngrok.io/");
             
             var responseTask = client.PostAsJsonAsync("predict/image", requestForm);
             responseTask.Wait();
