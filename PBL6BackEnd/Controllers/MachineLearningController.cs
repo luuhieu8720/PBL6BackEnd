@@ -26,5 +26,9 @@ namespace PBL6BackEnd.Controllers
         [HttpGet("predict")]
         [Authorize]
         public async Task<List<MaskPredictItem>> Get() => await machineLearningRepository.Get();
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin")]
+        public async Task Delete() => await machineLearningRepository.Delete();
     }
 }

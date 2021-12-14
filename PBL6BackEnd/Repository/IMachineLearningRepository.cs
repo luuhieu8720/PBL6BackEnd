@@ -14,5 +14,7 @@ namespace PBL6BackEnd.Repository
         Task Create(MaskPredictForm maskPredictForm);
 
         Task<List<MaskPredictItem>> Get();
+
+        Task Delete();
     }
 }

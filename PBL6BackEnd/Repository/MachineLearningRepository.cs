@@ -63,5 +63,13 @@ namespace PBL6BackEnd.Repository
             return await dataContext.MaskPredictedInfos.Select(x => x.ConvertTo<MaskPredictItem>())
                 .ToListAsync();
         }
+
+        public async Task Delete()
+        {
+            dataContext.MaskPredictedInfos
+                .RemoveRange(dataContext.MaskPredictedInfos.Select(x => x));
+
+            await dataContext.SaveChangesAsync();
+        }
     }
 }
