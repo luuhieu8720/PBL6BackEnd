@@ -16,13 +16,18 @@ namespace PBL6BackEnd.Repository
     {
         private readonly DataContext dataContext;
 
-        public MachineLearningRepository(DataContext dataContext)
+        private readonly IAuthenticationService authenticationService;
+
+        public MachineLearningRepository(DataContext dataContext, IAuthenticationService authenticationService)
         {
             this.dataContext = dataContext;
+            this.authenticationService = authenticationService;
         }
 
         public async Task<ResultResponse> Get(RequestForm requestForm)
         {
+            var currentuserId = authenticationService.CurrentUserId;
+
             using var client = new HttpClient();
             client.BaseAddress = new Uri("http://5fd5-35-226-107-177.ngrok.io");
             
@@ -42,6 +47,7 @@ namespace PBL6BackEnd.Repository
             {
                 var maskPredicted = new MaskPredictForm()
                 {
+                    UserId = currentuserId,
                     Base64String = requestForm.Base64String,
                     PredictedTime = DateTime.Now
                 };

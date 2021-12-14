@@ -7,6 +7,8 @@ namespace PBL6BackEnd.DTO.MaskPredictDTO
 {
     public class MaskPredictItem
     {
+        public Guid UserId { get; set; }
+
         public string Base64String { get; set; }
 
         public DateTime PredictedTime { get; set; }

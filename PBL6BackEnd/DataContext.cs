@@ -29,6 +29,13 @@ namespace PBL6BackEnd
                     LastName = "01",
                     Role = Role.Admin
                 });
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<MaskPredictedInfo>()
+                .HasOne<User>(x => x.User)
+                .WithMany(x => x.MaskPredictedInfos)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual DbSet<User> Users { get; set; }

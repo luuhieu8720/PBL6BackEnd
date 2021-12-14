@@ -22,5 +22,7 @@ namespace PBL6BackEnd.Model
         public Role Role { get; set; }
 
         public bool IsBlocked { get; set; }
+
+        public virtual List<MaskPredictedInfo> MaskPredictedInfos { get; set; }
     }
 }
