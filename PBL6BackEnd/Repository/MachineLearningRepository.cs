@@ -29,7 +29,7 @@ namespace PBL6BackEnd.Repository
             var currentuserId = authenticationService.CurrentUserId;
 
             using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://796f-35-232-130-167.ngrok.io");
+            client.BaseAddress = new Uri("http://9f7f-104-154-87-96.ngrok.io");
             
             var responseTask = client.PostAsJsonAsync("predict/image", requestForm);
             responseTask.Wait();
